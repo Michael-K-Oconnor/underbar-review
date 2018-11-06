@@ -236,7 +236,7 @@
 
       it('returns the first index that the target can be found at when there are multiple matches', function() {
         var numbers = [0,1,1,2];
-        expect(_indexOf(numbers,1)).to.equal(1);
+        expect(_.indexOf(numbers,1)).to.equal(1);
       });
     });
 
@@ -377,7 +377,7 @@
 
       it('should apply a function to every value in an array', function() {
         var multiplyByTwo = function(num){
-            return num*2;
+          return num*2;
         };
 
         expect(_.map([1, 2, 3], multiplyByTwo)).to.eql([2, 4, 6]);
