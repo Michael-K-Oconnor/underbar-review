@@ -228,6 +228,19 @@
 
   // Determine whether all of the elements match a truth test.
   _.every = function(collection, iterator) {
+
+    var tracker = true;
+
+    return _.reduce(collection,function(elem){
+        if( iterator(elem) === false)
+
+
+
+,true)
+
+
+
+
     // TIP: Try re-using reduce() here.
   };
 
