@@ -105,6 +105,34 @@
 
   // Produce a duplicate-free version of the array.
   _.uniq = function(array, isSorted, iterator) {
+
+
+    var nonDuplicates = [];
+    var iterateeResults = [];
+
+    
+
+    for( var k = 0 ; k < array.length; k++ ){
+
+      //When iterator exists
+      
+      if( iterator ){
+        if( !iterateeResults.includes( iterator(array[k])) ){
+          nonDuplicates.push(array[k]);
+          iterateeResults.push(iterator(array[k]));
+        }
+
+        //When iterator does not exist 
+      } else {
+        
+        if(!nonDuplicates.includes(array[k])){
+          nonDuplicates.push(array[k]);
+        }
+      }
+
+    }
+
+    return nonDuplicates;
   };
 
 
