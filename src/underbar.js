@@ -142,8 +142,8 @@
     // like each(), but in addition to running the operation on all
     // the members, it also maintains an array of results.
     var result = [];
-    _.each(collection, function(element){
-      result.push(iterator(element));
+    _.each(collection, function(value, key,collection){
+      result.push(iterator(value,key,collection));
     });
     return result;
   };
@@ -187,30 +187,60 @@
   //   }); // should be 5, regardless of the iterator function passed in
   //          No accumulator is given so the first element is used.
   _.reduce = function(collection, iterator, accumulator) {
+
+/*
+    var results = [];
     if (iterator) {
-      var collection = _.map(collection,iterator);
+      //var iterateeArray = _.map(collection,iterator);
+      for (var i = 0; i < collection.length; i++) {
+        results.push(memo, collection[])
+      }
+    } else {
+      var iterateeArray = collection.slice()
     }
 
-    if (!accumulator) {
+    if( !accumulator ){
+      accumulator = collection[0];
+       var k = 1;
+    } else {
+      var k = 0;
+    } 
+  
+    for( k ; k < collection.length; k ++ ){
+      if (iterateeArray[k]) {
+        accumulator += iterateeArray[k];
+      }
+    }
+*/  
+ 
+    if (accumulator === undefined) {
       accumulator = collection[0];
       for (var i = 1; i < collection.length; i++) {
         if (iterator) {
-          accumulator += iterator(accumulator,collection[i]);
+          var temp = iterator(accumulator,collection[i]);
+          if (temp !== undefined) {
+            accumulator = temp;
+          }
         } else {
           accumulator += collection[i];
         }
       }
 
     } else {
-        for (var i = 0; i < collection.length; i++) {
-          if (iterator) {
-            accumulator += iterator(accumulator,collection[i]);
-          } else {
+      for (var i = 0; i < collection.length; i++) {
+        if (iterator) {
+          var temp = iterator(accumulator,collection[i]);
+          if (temp !== undefined) {
+            accumulator = temp;
+          }
+        } else {
             accumulator += collection[i];
           }
         }
     }
-    return accumulator
+    
+    return accumulator;
+  
   };
 
   // Determine if the array or object contains a given value (using `===`).
@@ -229,14 +259,10 @@
   // Determine whether all of the elements match a truth test.
   _.every = function(collection, iterator) {
 
-    var tracker = true;
+    // var tracker = true;
 
-    return _.reduce(collection,function(elem){
-        if( iterator(elem) === false)
-
-
-
-,true)
+    // return _.reduce(collection,function(elem){
+    //     if( iterator(elem) === false) ,true
 
 
 
