@@ -247,33 +247,66 @@
   _.contains = function(collection, target) {
     // TIP: Many iteration problems can be most easily expressed in
     // terms of reduce(). Here's a freebie to demonstrate!
+  if( Array.isArray(collection) ){
+
     return _.reduce(collection, function(wasFound, item) {
       if (wasFound) {
         return true;
       }
       return item === target;
     }, false);
-  };
+  } else {
+    var objCollection = Object.values(collection);
+    return _.reduce(objCollection, function(wasFound, item) {
+      if (wasFound) {
+        return true;
+      }
+      return item === target;
+    }, false);
+  }
 
+  };
 
   // Determine whether all of the elements match a truth test.
   _.every = function(collection, iterator) {
+    
+    if( iterator === undefined ){
+      iterator = _.identity;  
+    }
 
-    // var tracker = true;
+    if( Array.isArray(collection) ){
 
-    // return _.reduce(collection,function(elem){
-    //     if( iterator(elem) === false) ,true
-
-
-
-
+      return _.reduce(collection, function(wasFound, item) {
+        if (!wasFound) {
+          return false;
+        }
+      return Boolean(iterator(item));
+      }, true);
+    } else {
+      var objCollection = Object.values(collection);
+      return _.reduce(objCollection, function(wasFound, item) {
+        if (!wasFound) {
+          return false;
+        }
+      return Boolean(iterator(item));
+      }, true);
+    } 
     // TIP: Try re-using reduce() here.
   };
 
   // Determine whether any of the elements pass a truth test. If no iterator is
   // provided, provide a default one
   _.some = function(collection, iterator) {
-    // TIP: There's a very clever way to re-use every() here.
+    // TIP: There's a very clever way to re-use every() here
+  
+  if (iterator === undefined) {
+    iterator = _.identity;
+  }
+  var areAllFailing = _.every(collection, function(elem) {
+    return !(iterator(elem))
+  });
+
+  return !areAllFailing; 
   };
 
 

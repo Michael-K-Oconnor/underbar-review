@@ -56,9 +56,10 @@
       });
 
       it('should return false given an array and a value not in that array', function() {
-        // Replace this line with an `expect` statement that tests
-        // the behavior described by the `it` string
-        throw new Error('This test is missing.');
+   
+        expect(_.contains([1,2,3,4,5],6)).to.be.false;
+    
+        //throw new Error('This test is missing.');
       });
 
       it('should return true given a object and a value from that object', function() {
@@ -89,9 +90,8 @@
       });
 
       it('fails for a collection of all-falsy values', function() {
-        // Replace this line with an `expect` statement that tests
-        // the behavior described by the `it` string
-        throw new Error('This test is missing.');
+                
+        expect(_.every(["",undefined,null,NaN],_.identity)).to.be.false;   
       });
 
       it('fails for a collection containing mixed falsy and truthy values', function() {
@@ -115,7 +115,7 @@
 
       it('should work when no callback is provided', function() {
         expect(_.every([true, true, true])).to.be.true;
-        expect(_.every([true, true, false])).to.be.false;
+        expect(_.every([true, true, false])).to.be.false; 
         expect(_.every([false, false, false])).to.be.false;
       });
     });
@@ -149,7 +149,7 @@
       it('should fail for a set containing no matching values', function() {
         // Replace this line with an `expect` statement that tests
         // the behavior described by the `it` string
-        throw new Error('This test is missing.');
+        expect(_.some([1,3,5], isEven)).to.be.false;
       });
 
       it('should pass for a collection containing one matching value', function() {
